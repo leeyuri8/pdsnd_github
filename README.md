@@ -4,7 +4,7 @@
 This project is created on 12/8/2023
 
 ### Project Title
-A Python project using pandas to explore bikeshare data.
+**A Python project using pandas to explore bikeshare data.**
 
 ### Description
 The program takes user input for the city (e.g. Chicago), month for which the user wants to view data (e.g. January; also includes an 'all' option), and day for which the user wants to view data (e.g. Monday; also includes an 'all' option).
@@ -24,12 +24,12 @@ Finally, the user is prompted with the choice of restarting the program or not.
 
 ### Files used
 I used these files:
-chicago.csv - Dataset containing all bikeshare information for the city of Chicago provided by Udacity.
+_chicago.csv_ - Dataset containing all bikeshare information for the city of Chicago provided by Udacity.
 
-new_york_city.csv - Dataset containing all bikeshare information for the city of New York provided by Udacity.
+_new_york_city.csv_ - Dataset containing all bikeshare information for the city of New York provided by Udacity.
 
-washington.csv - Dataset containing all bikeshare information for the city of Washington provided by Udacity.
+_washington.csv_ - Dataset containing all bikeshare information for the city of Washington provided by Udacity.
 
 
 ### Credits
-Aritra Chattaraj - Sole author for this program. 
+**Aritra Chattaraj - Sole author for this program.**
