@@ -1,24 +1,30 @@
 import time
+from unittest import expectedFailure
 import pandas as pd
 import numpy as np
 
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
-              'washington': 'washington.csv' }
+              'washington': 'washington.csv' } 
+months = ['january', 'february','fab',
+              'march',
+              'april', 'may', 'june', 'all']
+days = ['sunday', 'monday', 'tuesday','wednesday','thursday','friday','saturday','all'] 
+
+
 def get_filters():
  
     print('Hello! Let\'s explore some US bikeshare data!')
     city = input('Choose a city name: {chicago, new york city, washington}: ' ).lower()
+
+    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+
     while city not in CITY_DATA.keys():
         print('Enter a valid city, please: ')
         city = input('Choose a city name: {chicago, new york city, washington}; ' ).lower()
-    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-
 
     # TO DO: get user input for month (all, january, february, ... , june)
-    months = ['january', 'february','fab',
-              'march',
-              'april', 'may', 'june', 'all']
+
     
     while True:    
          month = input('choose month: (all, january, february , march , april , may ,june): ').lower()
@@ -28,7 +34,6 @@ def get_filters():
              print('unexpected/invalid input!')
    
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-    days = ['sunday', 'monday', 'tuesday','wednesday','thursday','friday','saturday','all'] 
     while True:
         day = input('choose a day: ').lower()
         if day in days:
@@ -36,24 +41,12 @@ def get_filters():
         else:
             print('unexpected/invalid input!')
                 
-
-
     print('-'*40)
     return city, month, day
 
 
 def load_data(city, month, day):
-    """
-    Loads data for the specified city and filters by month and day if applicable.
-
-    Args:
-        (str) city - name of the city to analyze
-        (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
-    Returns:
-        df - Pandas DataFrame containing city data filtered by month and day
-    """
-    
+ 
     df = pd.read_csv(CITY_DATA[city])
     df['Start Time'] = pd.to_datetime(df['Start Time'])                                   
     df['month'] = df['Start Time'].dt.month
@@ -161,18 +154,22 @@ def user_info(df,city):
 
 def main():
     while True:
-        city, month, day = get_filters()
-        df = load_data(city, month, day)
+        try:
+            city, month, day = get_filters()
+            df = load_data(city, month, day)
+            time_stats(df)
+            station_stats(df)
+            trip_duration_stats(df)
+            user_info(df,city)
 
-        time_stats(df)
-        station_stats(df)
-        trip_duration_stats(df)
-        user_info(df,city)
-
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
-        if restart.lower() != 'yes':
+            restart = input('\nWould you like to restart? Enter yes or no.\n')
+            if restart.lower() != 'yes':
+                break
+        except KeyboardInterrupt:
+            print("\n\nProgram interrupted by user. Exiting........")
             break
-
+        except Exception as e:
+            print(str(e))       
 
 if __name__ == "__main__":
 	main()
